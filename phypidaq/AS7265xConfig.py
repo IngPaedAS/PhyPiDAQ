@@ -109,11 +109,14 @@ class AS7265xConfig(object):
     else:
       buf[0], buf[1], buf[2], buf[3], buf[4], buf[5], buf[6], buf[7], buf[8], buf[9], buf[10], buf[11], buf[12], buf[13], buf[14], buf[15], buf[16], buf[17] = self.AS7265x.readRAW()
     
-    arrmax=np.amax(buf)
-    
-    for i in range(self.NChannels):
-      buf[i] /= arrmax#self.maxVal
-
+    if self.TrimTo1 ==1:
+      arrmax=np.amax(buf)    
+      for i in range(self.NChannels):
+        buf[i] /= arrmax
+    else:
+      for i in range(self.NChannels):
+        buf[i] /= self.maxVal
+      
   def closeDevice(self):
     self.AS7265x.setBlueLED(1) # LED on indicates standyby, uninitialized(LED is ON, when powered)
     self.AS7265x.shutterLED("AS72651",0)
