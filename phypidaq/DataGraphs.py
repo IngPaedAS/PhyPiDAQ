@@ -49,7 +49,13 @@ class DataGraphs(object):
         self.ChanColors += ColorList[0: Nc - len(self.ChanColors)]
     else:
       self.ChanColors = ['darkblue','sienna'] + ColorList[0 : Nc]
-
+      
+    for i in range(len(self.ChanColors)): ## convert FF00FF to #FF00FF 
+      if len(self.ChanColors[i])>=2:
+        if self.ChanColors[i][:2] =='HX':
+          self.ChanColors[i] = '#'+ self.ChanColors[i][2:]
+         
+        
     self.ChanLabels = [''] * Nc
     if 'ChanLabels' in ConfDict:
       v = ConfDict['ChanLabels']
@@ -125,6 +131,7 @@ class DataGraphs(object):
       axes.append(plt.subplot2grid((6,5),(4,0), rowspan=2, colspan=2) )
     if self.NAxes > 1:
       axes.append(axes[0].twinx())
+
 
     # history plot
     for i in range(self.NAxes):

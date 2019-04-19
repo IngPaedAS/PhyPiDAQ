@@ -267,9 +267,10 @@ class PhyPiUiInterface(Ui_PhyPiWindow):
 
       DAQfile = RunTag + '.daq'
       fullDAQfile = confdir + '/' + RunTag + '.daq'
-      if self.MB_Question('Question', 
-          'saving Config to file ' + fullDAQfile) == QMessageBox.Cancel:
-        return 1
+      ######################
+      #if self.MB_Question('Question', 
+      #    'saving Config to file ' + fullDAQfile) == QMessageBox.Cancel:
+      #  return 1
      
       DevFiles = DAQconfdict["DeviceFile"] 
       if type(DevFiles) != type([]):
@@ -294,7 +295,8 @@ class PhyPiUiInterface(Ui_PhyPiWindow):
       print(DAQconf, file = fDAQ )
       self.DAQfile = DAQfile
       fDAQ.close()
-      print('   - saved PhyPy configuration to ' + fullDAQfile)
+      ######################
+      #print('   - saved PhyPy configuration to ' + fullDAQfile)
 
       for i, DevFile in enumerate(DevFiles):
         cdir, fnam = os.path.split(DevFile)
@@ -305,11 +307,13 @@ class PhyPiUiInterface(Ui_PhyPiWindow):
         fDev = open(confdir + '/' + DevFile, 'w')
         print(DevConfs[i], file = fDev )
         fDev.close()
-        print('   - saved Device configuration to ' + fullDevFile)
+        ######################
+        #print('   - saved Device configuration to ' + fullDevFile)
 
-      if verbose:
-        message = self.MB_Info('Info', 
-                        'saved PhyPi and Device Configuration')               
+      ######################
+      #if verbose:
+      #  message = self.MB_Info('Info', 
+      #                  'saved PhyPi and Device Configuration')               
       return 0
 
     def saveDefaultConfig(self):
